@@ -1,9 +1,11 @@
-package volkfm.KanBanan.db.Models;
+package volkfm.KanBanan.models.board;
+
+import volkfm.KanBanan.models.column.Column;
+import volkfm.KanBanan.models.user.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Entity
@@ -13,20 +15,24 @@ public class Board {
     private Long id;
 
     private String name;
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Map<User, Boolean> permissions;
     private String privacyMode; // Should change type. Should think of its ues.
 
     @ManyToOne
     private User owner;
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.PERSIST)
-    private List<Column> columns = new ArrayList<Column>();
+    // TODO: Check cascade type and add orphan removal.
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Column> columns = new ArrayList<>();
 
     protected Board() {}
 
     public Board(String name) {
         this.name = name;
+    }
+
+    public Board(String name, String privacyMode) {
+        this.name = name;
+        this.privacyMode = privacyMode;
     }
 
     public Long getId() {
@@ -45,14 +51,6 @@ public class Board {
         this.name = name;
     }
 
-    public Map<User, Boolean> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(Map<User, Boolean> permissions) {
-        this.permissions = permissions;
-    }
-
     public String getPrivacyMode() {
         return privacyMode;
     }
@@ -65,7 +63,7 @@ public class Board {
         return owner;
     }
 
-    void setOwner(User owner) {
+    public void setOwner(User owner) {
         this.owner = owner;
     }
 
@@ -73,7 +71,7 @@ public class Board {
         return columns;
     }
 
-    void setColumns(List<Column> columns) {
+    public void setColumns(List<Column> columns) {
         this.columns = columns;
     }
 

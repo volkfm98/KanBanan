@@ -1,7 +1,7 @@
-package volkfm.KanBanan.db.Repositories;
+package volkfm.KanBanan.models.board;
 
 import org.springframework.data.repository.CrudRepository;
-import volkfm.KanBanan.db.Models.Board;
+import volkfm.KanBanan.models.board.Board;
 
 public interface BoardRepository extends CrudRepository<Board, Long> {
 }

@@ -1,9 +1,11 @@
-package volkfm.KanBanan.db.Models;
+package volkfm.KanBanan.models.column;
+
+import volkfm.KanBanan.models.card.Card;
+import volkfm.KanBanan.models.board.Board;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Entity
@@ -13,17 +15,16 @@ public class Column {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @javax.persistence.Column(nullable = false)
     private String name;
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Map<User, Boolean> permissions;
 
     @ManyToOne
     private Board board;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Card> cards = new ArrayList<Card>();
+    private List<Card> cards = new ArrayList<>();
 
-    protected Column() {}
+    public Column() {}
 
     public Column(String name) {
         this.name = name;
@@ -45,19 +46,11 @@ public class Column {
         this.name = name;
     }
 
-    public Map<User, Boolean> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(Map<User, Boolean> permissions) {
-        this.permissions = permissions;
-    }
-
     public Board getBoard() {
         return board;
     }
 
-    void setBoard(Board board) {
+    public void setBoard(Board board) {
         this.board = board;
     }
 
@@ -65,7 +58,7 @@ public class Column {
         return cards;
     }
 
-    void setCards(List<Card> cards) {
+    public void setCards(List<Card> cards) {
         this.cards = cards;
     }
 

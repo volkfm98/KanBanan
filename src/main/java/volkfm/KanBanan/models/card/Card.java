@@ -1,4 +1,7 @@
-package volkfm.KanBanan.db.Models;
+package volkfm.KanBanan.models.card;
+
+import volkfm.KanBanan.models.column.Column;
+import volkfm.KanBanan.models.user.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,12 +15,10 @@ public class Card {
 
     private String name;
     @ElementCollection(fetch = FetchType.EAGER)
-    private Map<User, Boolean> permissions;
-    @ElementCollection(fetch = FetchType.EAGER)
     private Map<String, String> components;
 
     @ManyToOne
-    private Column column;
+    private volkfm.KanBanan.models.column.Column column;
 
     @ManyToOne
     private User assignedBy;
@@ -47,14 +48,6 @@ public class Card {
         this.name = name;
     }
 
-    public Map<User, Boolean> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(Map<User, Boolean> permissions) {
-        this.permissions = permissions;
-    }
-
     public Map<String, String> getComponents() {
         return components;
     }
@@ -63,11 +56,11 @@ public class Card {
         this.components = components;
     }
 
-    public Column getColumn() {
+    public volkfm.KanBanan.models.column.Column getColumn() {
         return column;
     }
 
-    void setColumn(Column column) {
+    public void setColumn(Column column) {
         this.column = column;
     }
 
@@ -83,7 +76,7 @@ public class Card {
         return assignedTo;
     }
 
-    void setAssignedTo(List<User> assignedTo) {
+    public void setAssignedTo(List<User> assignedTo) {
         this.assignedTo = assignedTo;
     }
 

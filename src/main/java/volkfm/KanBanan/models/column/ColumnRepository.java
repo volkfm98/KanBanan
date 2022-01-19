@@ -1,7 +1,7 @@
-package volkfm.KanBanan.db.Repositories;
+package volkfm.KanBanan.models.column;
 
 import org.springframework.data.repository.CrudRepository;
-import volkfm.KanBanan.db.Models.Column;
+import volkfm.KanBanan.models.column.Column;
 
 public interface ColumnRepository extends CrudRepository<Column, Long> {
 }
